@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<script type="text/javascript">
+function count(){
+   var count 
+   // 读取localstorage数据，并转换为int类型
+   if(localStorage.getItem("count") == null) 
+       count =1
+   else
+       count = parseInt(localStorage.getItem("count"))+1;
+  // 显示访问计数
+  if(count > 1)
+    document.getElementById('message').innerHTML = "您已是第" + count+"次访问本站点了。" + "您已经拒绝我们" + (count-1) + "次了，还不留下您的意见和建议吗？";
+  else
+    document.getElementById('message').innerHTML = "欢迎您首次访问本站。留下你的信息吧！";
+  //保存新的访问计数
+   localStorage.setItem("count", count);
+   if(localStorage.getItem("username") == null ) ;
+   else {
+	  username = localStorage.getItem("username");
+	  document.getElementById('username').value = username;
+		}
+		
+   if(localStorage.getItem("email") == null ) ;
+   else{
+	  email = localStorage.getItem("email");
+	  document.getElementById('email').value = email;
+   }
+}
+//关闭窗口时保存数据。
+window.onbeforeunload = function () {
+	username = document.getElementById('username').value;
+	email = document.getElementById('email').value;
+	if( username != undefined )
+			localStorage.setItem("username", username);
+	if( email != undefined )
+			localStorage.setItem("email", email);
+}
+
+window.addEventListener("load", count, true);
+</script>
+<body>
+<div id="message">11111</div>
+</div>
+<form >
+<fieldset>
+<legend></legend>
+<center>
+<div style="padding:5px;width=600px">
+	<h2>您的信息</h2>
+	<table width='100%'>
+		<tr>
+			<td width='20%'>您的名字</td>
+			<td width='40%'><input id="username" type="text" ></td>
+			<td width='40%'></td>
+		</tr>
+		<tr>
+			<td>您的邮箱</td>
+			<td><input id="phone" type="text" ></td>
+			<td></td>
+		</tr>
+        <tr>
+			<td>您的年龄</td>
+			<td><option value="" selected></option>
+                 <select name="name2" id="name2" >
+					<script>
+                        for(var i=1;i<=100;i++){
+                        document.write("<option value='"+i+"'>"+i+"</option>");
+                        }
+                     </script>
+                  </select>
+            </td>
+			<td></td>
+		</tr>
+        <tr>
+			<td>您的手机号码</td>
+			<td><input id="email" type="email" ></td>
+			<td></td>
+		</tr>
+        <tr>
+			<td>住址</td>
+			<td><input id="address" type="text"></td>
+			<td>&nbsp;</td>
+		</tr>
+        <tr>
+			<td width='20%'>性别</td>
+			<td width ='40%'>
+                <input name="radiosex1" type="radio" id="radiosex1" checked>男</input>
+                 <input name="radiosex1" type="radio" id="radiosex2" />女</input>
+			</td>
+			<td width='20%'>&nbsp;</td>
+		</tr>
+	</table>
+</div>
+<div style="margin-top:10px;margin-bottom:20px">
+	<h2>对学校建设的意见</h2>
+	<table width='100%'>
+		<tr>
+			<td>您的想法：</td>
+			<td><textarea name="detauls" cols="45" rows="5"></textarea></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>您的意见：</td>
+			<td><textarea name="detauls" cols="45" rows="5"></textarea></td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</div>
+<input type="submit" value="提交" onclick="reg()">
+<input type="reset" value="重置">
+</center>
+</fieldset>
+</form>
+</div>
+</body>
+</html>

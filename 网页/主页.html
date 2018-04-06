@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<style>
+a:link,a:visited{
+ text-decoration:none; /*超链接无下划线*/
+}
+a:hover{
+ text-decoration:underline; /*鼠标放上去有下划线*/
+}
+#container {margin:0 auto; width:950px;}
+#mainContent { overflow:auto; zoom:1; margin-bottom:6px;}
+#side { width:200px; float:right;}
+.sidebox { border:1px solid #ed6400; background:#9CC; margin-bottom:6px;}
+.sidebox h4 { background:#ff911a; padding:2px 6px; border-bottom:1px solid #ed6400; color:#fff;}
+.sidebox ul { padding:4px 6px;}
+.sidebox ul li{ list-style-type:none;}
+#main{ width:742px; float:left;}
+.mainbox { border:1px solid #ed6400; background:#CFC; margin-bottom:6px;}
+.mainbox h2 { background:#ff911a; padding:2px 6px; border-bottom:1px solid #ed6400; color:#fff;}
+.mainbox ul { padding:4px 6px;}
+.mainbox ul li{ list-style-type:none;}
+</style>
+<style>
+*{ margin:0; padding:0; list-style:none;}
+#divSmallBox{overflow:hidden;*display:inline;*zoom:1;width:10px;height:10px;margin:0 5px;border-radius:10px;background:#ffffff;}
+#playBox{ width:800px; height:300px; margin:20px auto; background:#333; position:relative; overflow:hidden;}
+#playBox .oUlplay { width:99999px; position:absolute; left:0; top:0;}
+#playBox .oUlplay li{ float:left;}
+#playBox .pre{ cursor:pointer; width:45px; height:45px; background:url(../images/l.png) no-repeat; position:absolute; top:190px; left:10px; z-index:10;}
+#playBox .next{ cursor:pointer; width:45px; height:45px; background:url(../images/r.png) no-repeat; position:absolute; top:190px; right:10px; z-index:10;}
+#playBox .smalltitle {width:1000px; height:10px; position:absolute; bottom:15px; z-index:10}
+#playBox .smalltitle ul{ width:120px; margin:0 auto;}
+#playBox .smalltitle ul li{ width:10px; height:10px; margin:0 5px; border-radius:10px; background:#ffffff; float:left; overflow:hidden;*display:inline;*zoom:1;}
+#playBox .smalltitle .thistitle{ background:#69aaec;}
+</style>
+<script>
+function getStyle(obj,name)
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[name]
+	}
+	else
+	{
+		return getComputedStyle(obj,false)[name]
+	}
+}
+
+function getByClass(oParent,nClass)
+{
+	var eLe = oParent.getElementsByTagName('*');
+	var aRrent  = [];
+	for(var i=0; i<eLe.length; i++)
+	{
+		if(eLe[i].className == nClass)
+		{
+			aRrent.push(eLe[i]);
+		}
+	}
+	return aRrent;
+}
+
+function startMove(obj,att,add)
+{
+	clearInterval(obj.timer)
+	obj.timer = setInterval(function(){
+	   var cutt = 0 ;
+	   if(att=='opacity')
+	   {
+		   cutt = Math.round(parseFloat(getStyle(obj,att)));
+	   }
+	   else
+	   {
+		   cutt = Math.round(parseInt(getStyle(obj,att)));
+	   }
+	   var speed = (add-cutt)/4;
+	   speed = speed>0?Math.ceil(speed):Math.floor(speed);
+	   if(cutt==add)
+	   {
+		   clearInterval(obj.timer)
+	   }
+	   else
+	   {
+		   if(att=='opacity')
+		   {
+			   obj.style.opacity = (cutt+speed)/100;
+			   obj.style.filter = 'alpha(opacity:'+(cutt+speed)+')';
+		   }
+		   else
+		   {
+			   obj.style[att] = cutt+speed+'px';
+		   }
+	   }
+	   
+	},30)
+}
+
+  window.onload = function()
+  {
+	  var oDiv = document.getElementById('playBox');
+	  var oPre = getByClass(oDiv,'pre')[0];
+	  var oNext = getByClass(oDiv,'next')[0];
+	  var oUlBig = getByClass(oDiv,'oUlplay')[0];
+	  var aBigLi = oUlBig.getElementsByTagName('li');
+	  var oDivSmall = getByClass(oDiv,'smalltitle')[0]
+	  var aLiSmall = oDivSmall.getElementsByTagName('li');
+	  
+	  function tab()
+	  {
+	     for(var i=0; i<aLiSmall.length; i++)
+	     {
+		    aLiSmall[i].className = '';
+	     }
+	     aLiSmall[now].className = 'thistitle'
+	     startMove(oUlBig,'left',-(now*aBigLi[0].offsetWidth))
+	  }
+	  var now = 0;
+	  for(var i=0; i<aLiSmall.length; i++)
+	  {
+		  aLiSmall[i].index = i;
+		  aLiSmall[i].onclick = function()
+		  {
+			  now = this.index;
+			  tab();
+		  }
+	 }
+	  oPre.onclick = function()
+	  {
+		  now--
+		  if(now ==-1)
+		  {
+			  now = aBigLi.length;
+		  }
+		   tab();
+	  }
+	   oNext.onclick = function()
+	  {
+		   now++
+		  if(now ==aBigLi.length)
+		  {
+			  now = 0;
+		  }
+		  tab();
+	  }
+	  var timer = setInterval(oNext.onclick,2000) //滚动间隔时间设置
+	  oDiv.onmouseover = function()
+	  {
+		  clearInterval(timer)
+	  }
+	   oDiv.onmouseout = function()
+	  {
+		  timer = setInterval(oNext.onclick,2000) //滚动间隔时间设置
+	  }
+  }
+</script>
+<body>
+<div id="playBox">
+    <div class="pre"></div>
+    <div class="next"></div>
+    <div class="smalltitle">
+      <ul>
+        <li class="thistitle"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <ul class="oUlplay">
+       <li><img width="800px" src="../images_a/1.jpg"></li>
+       <li><img width="800px"  src="../images_a/2.jpg"></li>
+       <li><img width="800px"  src="../images_a/3.jpg"></li>
+       <li><img width="800px"  src="../images_a/4.jpg"></li>
+       <li><img width="800px"  src="../images_a/5.jpg"></li>
+       <li><img width="800px"  src="../images_a/6.jpg"></li>
+    </ul>
+</div>
+
+
+
+
+<div id="container">
+    <div id="mainContent1">
+        <div id="main1">
+            <div class="mainbox" align="center">
+                <h2>华软丝木棉</h2>
+                   <video width="600px" height="300px" autoplay="true" onmouseover="this.play()" onmouseout="this.pause()" src="../simumian.mp4" ></video>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div id="container">
+    <div id="mainContent">
+        <div id="main">
+            <div class="mainbox">
+                <h2>校园快讯</h2>
+                <table>
+                  <tr>
+                     <td width="600px"><a href="http://news.sise.com.cn/cms/5501.html">游戏系与从化惠从社区签订社会实践基地合作协议</td><td>2016-12-22</td></a>
+                  </tr>
+                   <tr>
+                     <td><a href="http://news.sise.com.cn/cms/5499.html">外语系日语专业师生赴广州大学学习交流</a></td><td>2016-12-21</td>
+                  </tr>
+                   <tr>
+                     <td><a href="http://news.sise.com.cn/cms/5498.html">华软学子获2016年广州市大学生知识产权知识竞赛优胜奖</a></td><td>2016-12-21</td>
+                  </tr>
+                  <tr>
+                     <td><a href="http://news.sise.com.cn/cms/5500.html">华软学院“走进高中”系列讲座 为高中学子答疑解惑获好评</a></td><td>2016-12-21</td>
+                  </tr>
+                   <tr>
+                     <td><a href="http://news.sise.com.cn/cms/5492.html">学院饮食服务中心开展“食堂满意度调查”活动</a></td><td>2016-12-16</td>
+                  </tr>
+                  <tr>
+                     <td><a href="http://news.sise.com.cn/cms/5489.html">广大华软服务外包研究院为第六届中国服务贸易年会学术支持单位</a></td><td>2016-12-16</td>
+                  </tr>
+                </table>
+            </div>
+        </div>
+        <div id="side">
+            <div class="sidebox">
+            <h4>学术预告</h4>
+            <ul>
+                 <li><a href="http://www.sise.com.cn/sise/article/650.html">科学在影像中的美好表达</a></li>
+                 <li><a href="http://www.sise.com.cn/sise/article/604.html">"湖边讲坛第40讲"</a></li>
+                 <li><a  href="http://www.sise.com.cn/sise/article/310.html">中国知网(CNK)应用讲座</a></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="container">
+    <div id="mainContent">
+        <div id="main">
+            <div class="mainbox">
+                <h2>媒体华软</h2>
+                <table>
+                  <tr>
+                     <td width="600px"><a href="http://news.sise.com.cn/cms/5480.html">【中央电视台.新闻联播】华软学院梁冠军董事长出席纪念西安事变80周年座谈会</td><td>2016-12-22</td></a>
+                  </tr>
+                   <tr>
+                     <td><a href="http://news.sise.com.cn/cms/5361.html">【中央电视台·新闻联播】华软学院梁冠军董事长出席国庆招待会</a></td><td>2016-12-21</td>
+                  </tr>
+                   <tr>
+                     <td><a href="http://news.sise.com.cn/cms/5319.html">【广东省教育厅网】华软学院教师节赠“校长电子贺卡” 教师反映“蛮有心意”</a></td><td>2016-12-21</td>
+                  </tr>
+                  <tr>
+                     <td><a href="http://news.sise.com.cn/cms/5417.html">【中央电视台】华软学院梁冠军董事长出席纪念孙中山先生诞辰150周年大会</a></td><td>2016-11-11</td>
+                  </tr>
+                  <tr>
+                     <td><a href="http://news.sise.com.cn/cms/5331.html">【人民日报】华软学院梁冠军董事长接受人民日报海外版采访 密切关注杭州G20峰会</a></td><td>2016-8-29</td>
+                  </tr>
+                  <tr>
+                     <td><a href="http://news.sise.com.cn/cms/5333.html">【羊城晚报】常务副院长迟云平就高校编制问题接受媒体采访</a></td><td>2016-8-5</td>
+                  </tr>
+                  <tr>
+                     <td><a href="http://news.sise.com.cn/cms/5334.html">【广东省教育厅】广大华软学院设“丝木棉奖”表彰党建与思政一线工作者</a></td><td>2016-6-30</td>
+                  </tr>
+                  <tr>
+                     <td><a href="http://news.sise.com.cn/cms/138.html">【中央电视台.新闻联播】华软梁冠军董事长出席世界华侨华人社团联谊大会</a></td><td>2016-6-2</td>
+                  </tr>
+                </table>
+            </div>
+        </div>
+        <div id="side">
+            <div class="sidebox">
+            <h4>学科竞赛</h4>
+            <ul>
+                  <li></li>
+                  <li><a href="http://news.sise.com.cn/cms/5497.html">全国大学生软件测试大赛</a></li>
+                  <li><a href="http://news.sise.com.cn/cms/5498.html">大学生知识产权竞赛</a></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

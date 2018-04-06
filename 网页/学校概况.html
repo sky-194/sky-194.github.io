@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<style>
+#a1{
+	text-align:center;
+	}
+#test{
+color: red;
+text-align:left;
+text-indent:2em;
+letter-spacing:0.5px;
+font-size:25px;
+-webkit-box-shadow:1px 1px 3px #3399CC;
+-moz-box-shadow:1px 1px 3px #3399CC;
+bpx-shadow:1px 1px 3px #3399CC;
+}
+#test1{
+text-align:left;
+text-indent:2em;
+letter-spacing:0.5px;
+font-size:20px;
+
+}
+</style>
+
+<body>
+<p><h2><marquee hspace="60" behavior="alternate" onMouseOut="this.start()" onMouseOver="this.stop()" scrollamount="1" ><b><font size="10">博学笃行，与时俱进</font></b></marquee></h2></p>
+<div>
+<p id="test">
+广州大学华软软件学院（简称华软学院）成立于2002年，创建之初是由广州大学和社会力量合作举办的民办二级学院，2006年经国家教育部批准确认为实施本科学历教育的全日制普通高等学校独立学院。华软学院由广州大学和广州盈和投资管理有限公司合作举办，是全国独立学院中学科专业特色鲜明的IT类专业院校，是国家发展和改革委员会国际合作中心合作示范学院，是广东省和广州市两级国际服务外包人才培训机构，经广东省民政厅评定为首批5A级社会组织。华软学院实行董事会领导下的院长负责制，董事长由著名爱国侨领、美国美东华人社团联合会总会主席梁冠军先生出任。
+</p>
+<p id="test">
+华软学院坐落在享有“北回归线上的明珠”美誉的从化经济开发区，即将开通的广州地铁14号线太平站出口旁，交通便利。华软校园景色秀美、环境怡人，一渠两湖布局雅致，丝木棉花绽放瑰伟，是莘莘学子读书治学的理想之所。学院纳入全国普通高校统一招生计划，面向全国招收理工类、文史类、美术类考生，目前在校学生近1.2万人。
+</p>
+</div>
+<font size="5"><b>院系专业</b></font>
+<p></p>
+<div id="a1" align="center">
+<table border="2" width="1000px" >
+    <tr>
+       <td>教学单位</td>
+       <td>专业设置</td>
+    </tr>
+    <tr>
+       <td>软件工程系</td>
+       <td>软件工程、信息工程</td>
+    </tr>
+    <tr>
+       <td>网络技术系</td>
+       <td>网络工程、信息管理与信息系统</td>
+    </tr>
+    <tr>
+       <td>游戏系</td>
+       <td>网络与新媒体、数字媒体技术、动画</td>
+    </tr>    
+    <tr>
+       <td>计算机系</td>
+       <td>计算机科学与技术、物联网工程</td>
+    </tr>
+     <tr>
+       <td>电子系</td>
+       <td>电子信息工程、自动化、通信工程、智能科学与技术</td>
+    </tr>
+    <tr>
+       <td>数码媒体系</td>
+       <td>数字媒体艺术、环境设计、视觉传达设计、风景园林、产品设计</td>
+    </tr>
+    <tr>
+       <td>国际经贸系</td>
+       <td>国际经济与贸易、电子商务</td>
+    </tr>    
+    <tr>
+       <td>财会系</td>
+       <td>计算机科学与技术、物联网工程</td>
+    </tr>
+     <tr>
+       <td>管理系</td>
+       <td>工商管理、物流管理、行政管理、市场营销</td>
+    </tr>    
+    <tr>
+       <td>外语系</td>
+       <td>英语、日语</td>
+    </tr>
+</table>
+</div>
+</div>
+<font size="5"><b>院徽</b></font>
+<div align="center">
+  <canvas width="200px" height="200px" id='canvas'></canvas>
+</div>
+<p id="test1">
+图形活泼灵动，配合鲜亮丰富的色彩，体现IT行业科技、创新、活力、时尚的感觉，符合华软的品牌定位和形象诉求；
+</p>
+<p id="test1">
+三个水滴型（或太极鱼型）构成一个首尾相接的类拓扑图形；寓意学院作为人才培养的摇篮，生生不息、循环无止；“三”的数义亦有多重寓意：“三”可立；三三为九可无限……还寓意学生及合作办学双方三方共赢、“三三制”的师资结构。
+</p>
+<p id="test1">
+红、黄、蓝三原色交集、过渡出丰富的色系，寓意基础的本原与应用的无限可能。在象征IT科技的蓝色外，增加红、黄两色，寓意对人本主义的重视。
+</p>
+</div>
+</body>
+</html>
+<script>
+var xh = document.getElementById('canvas').getContext('2d');
+//红色部分
+xh.fillStyle='red';
+xh.beginPath();
+xh.arc(125,100,65,0,2*Math.PI);
+xh.fill();
+xh.closePath();
+
+xh.fillStyle='white';
+xh.beginPath();
+xh.arc(110,90,55,0,2*Math.PI);
+xh.fill();
+xh.closePath();
+
+xh.fillStyle='white';
+xh.beginPath();
+xh.arc(155,70,41.5,0,2*Math.PI);
+xh.fill();
+xh.closePath();
+
+//黄色部分
+xh.fillStyle='yellow';
+xh.beginPath();
+xh.arc(122,85,65,4/6*Math.PI,1.5*Math.PI);
+xh.fill();
+xh.closePath()
+
+
+xh.fillStyle='white';
+xh.beginPath();
+xh.arc(140,80,65,3/4*Math.PI,1.5*Math.PI);
+xh.fill();
+xh.closePath()
+
+xh.fillStyle='white';
+xh.beginPath();
+xh.arc(100,125,17.5,0,1.5*Math.PI);
+xh.fill();
+xh.closePath()
+
+//蓝色部分
+xh.fillStyle='blue';
+xh.beginPath();
+xh.arc(135,81,58,4.7/6*Math.PI,2*Math.PI);
+xh.fill();
+xh.stroke();
+xh.closePath();
+
+xh.fillStyle='white';
+xh.beginPath();
+xh.arc(120,90,40,0*Math.PI,2*Math.PI);
+xh.fill();
+xh.closePath();
+
+xh.fillStyle='blue'
+xh.beginPath();
+xh.arc(175.5,84,17.6,0*Math.PI,2*Math.PI);
+xh.fill();
+xh.closePath();
+
+</script>
